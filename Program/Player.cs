@@ -1,18 +1,18 @@
 using Godot;
 using System;
-
 public partial class Player : CharacterBody3D
 {
-	private PlayerMovement Movement;
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    [Export] 
+    public float Speed { get; set; } = 5.0f; 
+    [Export] 
+    public float JumpVelocity { get; set; } = 4.5f;
+    private PlayerMovement Movement;
+    public override void _Ready()
     {
-        Movement= new PlayerMovement(this);
+        Movement = new PlayerMovement(this, Speed, JumpVelocity); 
     }
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
-		Movement.UpdateMovement(delta);
+        Movement.UpdateMovement(delta);
     }
 }
