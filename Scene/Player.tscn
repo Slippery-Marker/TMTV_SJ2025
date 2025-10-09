@@ -1,25 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://bv2od5rr7ocr4"]
 
-[ext_resource type="Script" uid="uid://c3xsbt5m4w1g0" path="res://Program/Player.cs" id="1_6l3be"]
+[ext_resource type="Script" uid="uid://twd04tllpcgv" path="res://Program/Player.cs" id="1_6l3be"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_j8lcb"]
-radial_segments = 7
-rings = 3
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j8lcb"]
 
-[node name="Player" type="Node3D"]
+[node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_6l3be")
 
-[node name="PlayerCollision" type="CSGMesh3D" parent="."]
+[node name="PlayerCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.9, 0, 0, 0, 0.7, 0, 0.9, 0)
-cast_shadow = 0
-calculate_tangents = false
-use_collision = true
-mesh = SubResource("CapsuleMesh_j8lcb")
+shape = SubResource("CapsuleShape3D_j8lcb")
 
-[node name="PCC" type="Node3D" parent="PlayerCollision"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+[node name="CameraControl" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="PlayerCamera" type="Camera3D" parent="PlayerCollision/PCC"]
-transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0.2)
-fov = 90.0
-near = 0.001
+[node name="PlayerCamera" type="Camera3D" parent="CameraControl"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0.25)

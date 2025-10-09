@@ -1,6 +1,6 @@
 using Godot;
 using System;
 
-public partial class PlayerProperties : GodotObject
+public partial class PlayerProperty : GodotObject
 {
 }
