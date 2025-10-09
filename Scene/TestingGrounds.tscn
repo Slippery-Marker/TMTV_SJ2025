@@ -5,8 +5,7 @@
 [node name="RootNode" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("1_a7pel")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8469136, -9)
-floor_snap_length = 0.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6878977, -7.4767256)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 0.1, 0, 0, 0, 20, 0, -0.1, 0)
