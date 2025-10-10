@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnjra2ol5vbe8"]
+
+[ext_resource type="PackedScene" uid="uid://xgxdbavmpxxa" path="res://Scenes/PB/Player.tscn" id="1_cmgem"]
+
+[node name="Test" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(41.731445, 0.087890625, 56.51758)
+
+[node name="PlayerController" parent="." instance=ExtResource("1_cmgem")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41574514, 0)
