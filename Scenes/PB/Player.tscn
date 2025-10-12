@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://xgxdbavmpxxa"]
+[gd_scene load_steps=3 format=3 uid="uid://xgxdbavmpxxa"]
+
+[ext_resource type="Script" uid="uid://bud7dup4vpwq6" path="res://programs/player_brain.gd" id="1_t4ird"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_of6eb"]
 
 [node name="PlayerController" type="CharacterBody3D"]
+script = ExtResource("1_t4ird")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -11,10 +14,12 @@ shape = SubResource("CapsuleShape3D_of6eb")
 [node name="CameraController" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraController"]
+[node name="PlayerCamera" type="Camera3D" parent="CameraController"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.48721588)
 fov = 90.0
 
-[node name="PlayerRay" type="RayCast3D" parent="CameraController/Camera3D"]
+[node name="PlayerRay" type="RayCast3D" parent="CameraController/PlayerCamera"]
+unique_name_in_owner = true
 collision_mask = 3
 collide_with_areas = true
