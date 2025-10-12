@@ -4,9 +4,10 @@ extends RefCounted
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 var character: CharacterBody3D 
-var mouse:player_movement_mouseinfluence
+#var mouse:player_movement_mouseinfluence
 func _ready()->void:
-	mouse=player_movement_mouseinfluence.new()
+	pass
+#	mouse=player_movement_mouseinfluence.new()
 func set_character_node(node: CharacterBody3D) -> void:
 	# PlayerController's self Getter Setter within player_brain.gd
 	character = node
@@ -28,3 +29,4 @@ func handle_movement(delta: float) -> void:
 		character.velocity.x = move_toward(character.velocity.x, 0, SPEED)
 		character.velocity.z = move_toward(character.velocity.z, 0, SPEED)
 	character.move_and_slide()
+#the code is built for pc only using the template provided by godot and tweeked here and there with the help of google gemini (tweak only (base code is human written)) for modular programming (OOP)
