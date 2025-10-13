@@ -7,8 +7,8 @@ var mmouse:player_movement_mouse_influence
 func _ready() -> void:
 	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
 	movement = player_movement.new()
-	movement.set_character_node(self)
 	mmouse=player_movement_mouse_influence.new()
+	movement.set_character_node(self)
 	mmouse.set_camera_player_node(%CameraController,self)
 func _physics_process(delta: float) -> void:
 	movement.handle_movement(delta)
@@ -19,8 +19,14 @@ func _process(delta: float) -> void:
 func _input(event):
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
-	if event.is_action_pressed("act2"):
+#NOTE: i will clean this up later (logic needs to be in seperate file)
+	#NOTE: Mouse capture Toggle (middle mouse OR tab key)
+	if event.is_action_pressed("act3"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#NOTE: when to move camera (if mouse capture == true and if mouse moving)
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		if InputEventMouseMotion:
+			mmouse.update_camera()
