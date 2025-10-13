@@ -39,4 +39,9 @@ func update_camera(delta:float):
 	_camera.rotation.z=0
 	_rotation=0
 	_tilt=0
+func mouse_toggle():
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 #NOTE: this one code nearly had me punch something, following the tutorials is one thing, understanding the code and turning it into a modular logic like this one is another. for context go and watch StayAtHomeDev's tutorial on FPS controller, i followed that and i had to tweak the code a little bit too much, my brain hurts. thanks google gemini.

@@ -1,7 +1,9 @@
 class_name player_brain
 extends CharacterBody3D
+#NOTE: Logic Instantiation Variables
 var movement: player_movement
 var mmouse:player_movement_mouse_influence
+var interact:player_object_interaction
 #NOTE: Changable Settings
 @export var camera_rotation_up:=deg_to_rad(+85)
 @export var camera_rotation_down:=deg_to_rad(-85)
@@ -10,25 +12,24 @@ func _ready() -> void:
 	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
 	movement = player_movement.new()
 	mmouse=player_movement_mouse_influence.new()
+	interact=player_object_interaction.new()
 	movement.set_character_node(self)
 	mmouse.set_camera_player_node(%CameraController,self)
 	mmouse.set_rotation_limit(camera_rotation_up,camera_rotation_down)
 	mmouse.set_mouse_sensitivity(mouse_sensitivity)
+	interact.set_raycast(%PlayerRay, %InteractText)
 func _process(delta: float) -> void:
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		mmouse.update_camera(delta)
-func _physics_process(delta: float) -> void:
-	movement.handle_movement(delta)
+		movement.handle_movement(delta)
+	interact._process()
 func _input(event):
 	#NOTE: Closes game with ESC.
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
-#NOTE: i will clean this up later (logic needs to be in seperate file)
-	#NOTE: Mouse capture Toggle (middle mouse OR tab key OR even L key)
-	if event.is_action_pressed("act3"):
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#NOTE: Mouse capture Toggle (Tab key OR L key)
+	if event.is_action_pressed("act4"):
+		mmouse.mouse_toggle()
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED && event is InputEventMouseMotion:
 		mmouse.mouse_update(event)
 # NOTE?: i got modular gdscript files in my directory i'm instancing my code for better performance right now i'm improving my coding skills. i'm a object oriented programming programmer man i'm a performance valuing developer for real.
