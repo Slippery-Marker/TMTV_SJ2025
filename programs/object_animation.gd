@@ -1,0 +1,2 @@
+class_name object_animation
+extends RefCounted

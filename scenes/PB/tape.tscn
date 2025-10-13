@@ -4,7 +4,9 @@
 [ext_resource type="Script" uid="uid://i3y07yc7nimg" path="res://programs/object_brain.gd" id="2_qbj4d"]
 
 [node name="tape" instance=ExtResource("1_e7mg4")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("2_qbj4d")
 
 [node name="collision" parent="." index="1"]
-collision_layer = 3
+transform = Transform3D(0.162, 0, 0, 0, 0.4, 0, 0, 0, 0.714, 0, 0, 0)
+collision_layer = 2
