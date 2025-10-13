@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		mmouse.update_camera(delta)
 		movement.handle_movement(delta)
-	interact._process()
+		interact._process()
 func _input(event):
 	#NOTE: Closes game with ESC.
 	if event.is_action_pressed("exit"):

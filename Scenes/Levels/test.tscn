@@ -35,7 +35,7 @@ directional_shadow_max_distance = 412.0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 use_collision = true
-size = Vector3(41.731445, 0.087890625, 56.51758)
+size = Vector3(50, 0.088, 50)
 
 [node name="PlayerController" parent="." instance=ExtResource("1_cmgem")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3782954, -6.0653076)
