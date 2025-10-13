@@ -3,6 +3,7 @@ extends Node3D
 enum behaviour{tape=0,tv=1,key=2,locked_door=3}
 @export var behavior:behaviour=behaviour.tape
 static var _inv:inventory_manager=inventory_manager.new()
+#NOTE: the problem with this ready function is it makes a new one for all of the functions instantiated from the called class, so yeah inventory no worky if put in _ready().
 #func _ready()->void:
 #	_inv=inventory_manager.new()
 func interact() -> void:
