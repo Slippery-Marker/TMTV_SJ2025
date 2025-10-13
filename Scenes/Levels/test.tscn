@@ -38,6 +38,7 @@ size = Vector3(41.731445, 0.087890625, 56.51758)
 
 [node name="PlayerController" parent="." instance=ExtResource("1_cmgem")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41574514, 21.194271)
+mouse_sensitivity = 0.3
 
 [node name="TestObject" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9999945, 0.0033161195, 0, -0.0033161195, 0.9999945, -11.70214, 0.6882864, -12.841734)
