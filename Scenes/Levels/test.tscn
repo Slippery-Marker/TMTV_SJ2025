@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnjra2ol5vbe8"]
+[gd_scene load_steps=9 format=3 uid="uid://dnjra2ol5vbe8"]
 
 [ext_resource type="Script" uid="uid://i3y07yc7nimg" path="res://programs/object_brain.gd" id="1_1m5gc"]
 [ext_resource type="PackedScene" uid="uid://xgxdbavmpxxa" path="res://scenes/PB/Player.tscn" id="1_cmgem"]
+[ext_resource type="PackedScene" uid="uid://b4v785wd24pnv" path="res://scenes/PB/tape.tscn" id="3_8kuwg"]
+[ext_resource type="PackedScene" uid="uid://dsl43yp2l26ui" path="res://scenes/PB/tv.tscn" id="4_oteci"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmgem"]
 sky_top_color = Color(0.7451432, 0.45579368, 0.26899692, 1)
@@ -51,3 +53,9 @@ script = ExtResource("1_1m5gc")
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(0.21, 0, 0, 0, 1, 0, 0, 0, 1, -11.185597, 1.1136947, -12.8467865)
 use_collision = true
+
+[node name="tv" parent="." instance=ExtResource("4_oteci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7637153, 0.049999714, 3.253337)
+
+[node name="tape" parent="." instance=ExtResource("3_8kuwg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7887588, 0.33000022, 5.0165367)

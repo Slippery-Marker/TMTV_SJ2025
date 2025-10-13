@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4v785wd24pnv"]
+
+[ext_resource type="PackedScene" uid="uid://cp5kn7p61cuiy" path="res://assets/3D/Models/tape.glb" id="1_e7mg4"]
+[ext_resource type="Script" uid="uid://i3y07yc7nimg" path="res://programs/object_brain.gd" id="2_qbj4d"]
+
+[node name="tape" instance=ExtResource("1_e7mg4")]
+script = ExtResource("2_qbj4d")
+
+[node name="collision" parent="." index="1"]
+collision_layer = 3

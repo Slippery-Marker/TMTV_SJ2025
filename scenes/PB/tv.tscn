@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsl43yp2l26ui"]
+
+[ext_resource type="PackedScene" uid="uid://dh13cl0g7glm1" path="res://assets/3D/Models/tv.glb" id="1_4o2nj"]
+[ext_resource type="Script" uid="uid://i3y07yc7nimg" path="res://programs/object_brain.gd" id="2_41xin"]
+
+[node name="tv" instance=ExtResource("1_4o2nj")]
+script = ExtResource("2_41xin")
+behavior = 1
+
+[node name="collision" parent="TV" index="0"]
+collision_layer = 3
