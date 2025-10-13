@@ -1,5 +1,5 @@
 class_name player_movement
-# Does NOT need to be inheriting from the node it's trying to affect. also RefCounted is cool.
+# NOTE: Does NOT need to be inheriting from the node it's trying to affect. also RefCounted is kinda cool.
 extends RefCounted 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -29,4 +29,4 @@ func handle_movement(delta: float) -> void:
 		character.velocity.x = move_toward(character.velocity.x, 0, SPEED)
 		character.velocity.z = move_toward(character.velocity.z, 0, SPEED)
 	character.move_and_slide()
-#the code is built for pc only using the template provided by godot and tweeked here and there with the help of google gemini (tweak only (base code is human written)) for modular programming (OOP)
+#NOTE: the code is built for pc only using the template provided by godot and tweeked here and there with the help of google gemini (tweak only (base code is human written)) for modular programming (OOP)
