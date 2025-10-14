@@ -4,6 +4,10 @@ enum behaviour{tape=0,tv=1,key=2,lock=3,none=4,unlocked_door=5}
 enum animation{door=0,item=1,toggle=2,rest=3,none=4}
 static var _shared_tape_video_pool:Array[VideoStream]
 static var _shared_tape_audio_pool:Array[AudioStream]
+static var _is_pool_initialized: bool = false
+static var _tape_rng_poolsize:int
+static var _tape_rng_poolpointer:int
+static var _tape_rng:int
 @export var video_streams_tape: Array[VideoStream]
 @export var audio_streams_tape: Array[AudioStream]
 @export var normal_audio:Array[AudioStream]
@@ -15,9 +19,6 @@ static var _shared_tape_audio_pool:Array[AudioStream]
 @export var bob_speed:float=0.5
 @export var rng_range_min: int = 0 # New: Min value for random number
 @export var rng_range_max: int = 100 # New: Max value for random number
-var _tape_rng_poolsize:int
-var _tape_rng_poolpointer:int
-var _tape_rng:int
 var _video_player:VideoStreamPlayer
 var _audio_player:AudioStreamPlayer3D
 var _door_audio_player:AudioStreamPlayer3D
@@ -28,14 +29,15 @@ static var _inv:inventory_manager=inventory_manager.new()
 func _ready() -> void:
 	_initial_y = global_transform.origin.y
 	_static_initial_y = rotation.y # Initialize target to current X rotation
-
 	randomize()
 	match behavior:
 		0:
 			pass
 		1:
-			_shared_tape_video_pool.assign(video_streams_tape)
-			_shared_tape_audio_pool.assign(audio_streams_tape)
+			if !_is_pool_initialized:
+				_shared_tape_video_pool.assign(video_streams_tape)
+				_shared_tape_audio_pool.assign(audio_streams_tape)
+				_is_pool_initialized = true
 			_tape_rng_poolsize=_shared_tape_video_pool.size()
 			_set_rng_tv()
 			_set_rng_tape()
@@ -68,7 +70,7 @@ func _set_animator(ANI:int):
 func _generate_random_num(min_val: int, max_val: int) -> int:
 	return randi() % (max_val - min_val + 1) + min_val
 func _gen_rand_num_tape(min_val:int,max_val:int)->int:
-	return randi()%(max_val-min_val+1)
+	return randi()%(max_val-min_val)
 func _set_rng_tape():
 	_tape_rng_poolsize=_shared_tape_video_pool.size()
 	_tape_rng_poolpointer=_tape_rng_poolsize-1
@@ -78,6 +80,7 @@ func _set_rng_tape():
 		print("current pointer on ",_tape_rng)
 	else:
 		_tape_rng=0
+		printerr("WE ARE OUT OF MEDIA, GO MAKE SOME :(")
 func _set_rng_tv():
 	_rng=_generate_random_num(rng_range_min,rng_range_max)
 
@@ -125,7 +128,7 @@ func interact():
 					_set_rng_tv()
 					await _audio_player.finished
 					queue_free()
-				else:
+				elif _tape_rng_poolsize >=1:
 					print("Eh... ",_rng," is not a part of the the secret numbers gang")
 					%holder.show()
 					_video_player.stream=_shared_tape_video_pool[_tape_rng]
@@ -133,12 +136,14 @@ func interact():
 					print("Playing: ",_tape_rng)
 					_video_player.play()
 					_audio_player.play()
-					#_tape_rng_poolsize=_shared_tape_video_pool.size()
-					if _tape_rng_poolsize>1:
+					print("items before delete: ",_shared_tape_video_pool)
+					if _tape_rng_poolsize==1:
+						print("items in poolsize check: ",_shared_tape_video_pool)
+						pass
+					else:
 						_shared_tape_video_pool.remove_at(_tape_rng)
 						_shared_tape_audio_pool.remove_at(_tape_rng)
-					else:
-						printerr("LAST MEDIA!!")
+						print("items after delete: ",_shared_tape_video_pool)
 					randomize()
 					_set_rng_tv()
 					_set_rng_tape()

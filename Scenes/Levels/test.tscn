@@ -103,3 +103,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.029303074, -10.465495)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
 shape = SubResource("SphereShape3D_jk60j")
+
+[node name="tape5" parent="." instance=ExtResource("3_8kuwg")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.048327, 0.722154, 7.0898705)
+
+[node name="tape6" parent="." instance=ExtResource("3_8kuwg")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -5.45585, 0.722154, 7.0898705)
+
+[node name="tape7" parent="." instance=ExtResource("3_8kuwg")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4.939906, 0.722154, 7.0898705)
+
+[node name="tape8" parent="." instance=ExtResource("3_8kuwg")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4.256425, 0.722154, 7.0898705)
