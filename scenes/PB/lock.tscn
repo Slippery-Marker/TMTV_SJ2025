@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhuxg43ntq2qv"]
+
+[ext_resource type="PackedScene" uid="uid://c34gav4pdjbl3" path="res://assets/3D/Models/lock.glb" id="1_xkind"]
+
+[node name="lock" instance=ExtResource("1_xkind")]
+
+[node name="collision" parent="." index="1"]
+collision_layer = 0

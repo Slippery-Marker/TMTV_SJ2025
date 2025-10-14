@@ -2,12 +2,12 @@ class_name player_object_interaction
 extends RefCounted
 var _ray: RayCast3D
 var _label: Label
+const BEH = object_brain.behaviour
 func set_raycast(ray:RayCast3D, label:Label) -> void:
 	_ray = ray
 	_label = label
 #NOTE: there are times you need to get the parent (ex: glTf import)
 func get_node_parent(node: Node) -> Node:
-	# CRASH FIX: Immediately check if the node is valid before accessing methods.
 	if not is_instance_valid(node):
 		return null
 	# 1. Check if the current node has the method we care about
@@ -25,7 +25,8 @@ func _process() -> void:
 		var collider: Node = _ray.get_collider()
 		var interactive_object: Node = get_node_parent(collider)
 		#NOTE: always check if that shit valid bro i swear to god (crashed almost 100 times)
-		if interactive_object and is_instance_valid(interactive_object):
+		#NOTE: if you want one of the behaviors to skip this check, you have to define the enum in a constant variable (this one confused me too long)
+		if interactive_object and is_instance_valid(interactive_object) && interactive_object.get_behavior() != BEH.none:
 			_label.show()
 			# Communicates the interaction
 			if Input.is_action_just_pressed("int1"):
