@@ -7,8 +7,9 @@ var interact:player_object_interaction
 #NOTE: Changable Settings
 @export var camera_rotation_up:=deg_to_rad(+85)
 @export var camera_rotation_down:=deg_to_rad(-85)
-@export var mouse_sensitivity:float=(1)
+@export var mouse_sensitivity:float=(0.002)
 func _ready() -> void:
+	
 	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
 	movement = player_movement.new()
 	mmouse=player_movement_mouse_influence.new()
@@ -20,7 +21,7 @@ func _ready() -> void:
 	interact.set_raycast(%PlayerRay, %InteractText)
 func _process(delta: float) -> void:
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		mmouse.update_camera(delta)
+		mmouse.update_camera()
 		movement.handle_movement(delta)
 		interact._process()
 func _input(event):

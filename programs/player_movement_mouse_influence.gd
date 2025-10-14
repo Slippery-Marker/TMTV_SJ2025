@@ -28,10 +28,10 @@ func mouse_update(event:InputEvent):
 	var _mouse:InputEvent=event as InputEventMouseMotion
 	_rotation=_mouse.relative.x*_mouse_sensitivity
 	_tilt=_mouse.relative.y*_mouse_sensitivity
-func update_camera(delta:float):
-	_mouse_rotation.x-=_tilt*delta
+func update_camera():
+	_mouse_rotation.x-=_tilt
 	_mouse_rotation.x=clamp(_mouse_rotation.x,_rotation_limit_down,_rotation_limit_up)
-	_mouse_rotation.y-=_rotation*delta
+	_mouse_rotation.y-=_rotation
 	_player_rotation=Vector3(0,_mouse_rotation.y,0)
 	_camera_rotation=Vector3(_mouse_rotation.x,0,0)
 	_camera.transform.basis=Basis.from_euler(_camera_rotation)

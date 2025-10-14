@@ -16,6 +16,7 @@ static var _shared_tape_audio_pool:Array[AudioStream]
 @export var rng_range_min: int = 0 # New: Min value for random number
 @export var rng_range_max: int = 100 # New: Max value for random number
 var _tape_rng_poolsize:int
+var _tape_rng_poolpointer:int
 var _tape_rng:int
 var _video_player:VideoStreamPlayer
 var _audio_player:AudioStreamPlayer3D
@@ -63,11 +64,12 @@ func  _set_behavior(BEH:int):
 func _generate_random_num(min_val: int, max_val: int) -> int:
 	return randi() % (max_val - min_val + 1) + min_val
 func _gen_rand_num_tape(min_val:int,max_val:int)->int:
-	return randi()%(max_val-min_val+1)+min_val
+	return randi()%(max_val-min_val)
 func _set_rng_tape():
 	_tape_rng_poolsize=_shared_tape_video_pool.size()
-	if _tape_rng_poolsize<1:
-		_tape_rng=_gen_rand_num_tape(0,_tape_rng_poolsize)
+	_tape_rng_poolpointer=_tape_rng_poolsize-1
+	if _tape_rng_poolsize>1:
+		_tape_rng=_gen_rand_num_tape(0,_tape_rng_poolpointer)
 	else:
 		_tape_rng=0
 func _set_rng_tv():
@@ -101,6 +103,7 @@ func interact():
 			print("Running TAPE interaction logic.")
 			_inv.collect_tape()
 			print("(tapes collected: ",_inv.get_tape(),")")
+			print("(amount of overall collected tapes: ",_inv.total_tape())
 			queue_free()
 		1:
 			print("Running TV interaction logic.")
@@ -137,11 +140,11 @@ func interact():
 				_set_behavior(4)
 			else:
 				printerr("INSUFFICIENT TAPES!")
-				_animator=3
 		2:
 			print("Running KEY interaction logic.")
 			_inv.collect_key()
 			print("(keys collected: ",_inv.get_key(),")")
+			print("(amount of overall collected keys: ",_inv.total_key())
 			queue_free()
 		3:
 			print("Running LOCK interaction logic.")
