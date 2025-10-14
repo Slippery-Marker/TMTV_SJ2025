@@ -60,16 +60,22 @@ func _on_video_finished():
 	_audio_player.stream=null
 	%holder.queue_free()
 func  _set_behavior(BEH:int):
+	@warning_ignore("int_as_enum_without_cast")
 	behavior=BEH
+func _set_animator(ANI:int):
+	@warning_ignore("int_as_enum_without_cast")
+	_animator=ANI
 func _generate_random_num(min_val: int, max_val: int) -> int:
 	return randi() % (max_val - min_val + 1) + min_val
 func _gen_rand_num_tape(min_val:int,max_val:int)->int:
-	return randi()%(max_val-min_val)
+	return randi()%(max_val-min_val+1)
 func _set_rng_tape():
 	_tape_rng_poolsize=_shared_tape_video_pool.size()
 	_tape_rng_poolpointer=_tape_rng_poolsize-1
+	print("pool size ",_tape_rng_poolsize," beginner pointer ",_tape_rng_poolpointer)
 	if _tape_rng_poolsize>1:
 		_tape_rng=_gen_rand_num_tape(0,_tape_rng_poolpointer)
+		print("current pointer on ",_tape_rng)
 	else:
 		_tape_rng=0
 func _set_rng_tv():
@@ -94,7 +100,7 @@ func _process(delta: float) -> void:
 			var current_position = global_transform.origin
 			current_position.y = _initial_y
 			global_transform.origin = current_position
-			_animator=4
+			_set_animator(4)
 		4:
 			pass
 func interact():
@@ -112,7 +118,7 @@ func interact():
 				print("(tapes remaining: ",_inv.get_tape(),")")
 				if _rng==23 || _rng== 10 || _rng==81:
 					print("WOULD YOU LOOK AT THAT! THE WORLD IS not revolving its the TV!!!",_rng)
-					_animator=1
+					_set_animator(1)
 					_audio_player.stream=normal_audio[0]
 					_audio_player.play()
 					randomize()
@@ -166,7 +172,7 @@ func interact():
 			_door_audio_player.stream=normal_audio[0]
 			_door_audio_player.play()
 			await _door_audio_player.finished
-			_animator=0
+			_set_animator(0)
 func get_behavior():
 	return behavior
 #NOTE: this might be one of the most modular things in the project, you put this on any object it will work but yeah its pretty limited but hey im running low on time thanks to what happend with Mono Godot and the outdated documentation/tutorials that just throw errors even when you copy 1 by 1 idk how that's even possible.
