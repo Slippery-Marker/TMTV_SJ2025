@@ -18,3 +18,5 @@ mono_crash.*.json
 
 # Project-Specific ignores
 assets/images/brand
+/assets/Sounds
+/assets/Videos

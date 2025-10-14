@@ -25,4 +25,21 @@ func handle_movement(delta: float) -> void:
 		_player.velocity.x = move_toward(_player.velocity.x, 0, SPEED)
 		_player.velocity.z = move_toward(_player.velocity.z, 0, SPEED)
 	_player.move_and_slide()
+	# Assume 'velocity' is the Vector3 property on your CharacterBody3D script
+# that is passed to move_and_slide().
+#NOTE: fucked up physics push system that gemini wrote like why does it work this BAD
+	for i in _player.get_slide_collision_count():
+		const PUSH_FACTOR = 200
+		var collision = _player.get_slide_collision(i)
+	# Check if the collided object is a RigidBody3D
+		if collision.get_collider() is RigidBody3D:
+			var body: RigidBody3D = collision.get_collider()
+			var horizontal_player_vel = Vector3(_player.velocity.x, 0, _player.velocity.z)
+			if horizontal_player_vel.length_squared()>0.001:
+				var normal = collision.get_normal()
+				var speed_into_box = horizontal_player_vel.dot(normal)
+				if speed_into_box < 0:
+					var push_direction = -normal.normalized()
+					var push_magnitude = (-speed_into_box) * body.mass * PUSH_FACTOR
+					body.apply_force(push_direction * push_magnitude)
 #NOTE: the code is built for pc only using the template provided by godot and tweeked here and there with the help of google gemini (tweak only (base code is human written)) for modular programming (OOP)
