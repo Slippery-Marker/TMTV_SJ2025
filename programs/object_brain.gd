@@ -62,13 +62,17 @@ func interact() -> void:
 			if _inv.get_tape()!=0:
 				_inv.use_tape()
 				print("(tapes remaining: ",_inv.get_tape(),")")
-				if _rng==21 || _rng== 10 || _rng==81:
-					print("WOULD YOU LOOK AT THAT! THE WORLD IS not revolving its the TV!!!")
+				if _rng==23 || _rng== 10 || _rng==81:
+					print("WOULD YOU LOOK AT THAT! THE WORLD IS not revolving its the TV!!!",_rng)
 					_animator=1
+					
+					randomize()
+					_set_rng()
 				else:
 					print("Eh... ",_rng," is not a part of the the secret numbers gang")
 					randomize()
 					_set_rng()
+				_set_behavior(4)
 			else:
 				printerr("INSUFFICIENT TAPES!")
 				_animator=3
@@ -94,4 +98,6 @@ func interact() -> void:
 			_animator=0
 func get_behavior():
 	return behavior
-#NOTE: this might be one of the most modular things in he project, you put this on any object it will work but yeah its pretty limited but hey im running low on time thanks to what happend with Mono Godot and the outdated documentation/tutorials that just throw errors even when you copy 1 by 1 idk how that's even possible.
+#NOTE: this might be one of the most modular things in the project, you put this on any object it will work but yeah its pretty limited but hey im running low on time thanks to what happend with Mono Godot and the outdated documentation/tutorials that just throw errors even when you copy 1 by 1 idk how that's even possible.
+#NOTE: this particular script was actually fun to make. realizing how to handle the logic in a way that works and throwing the initial solution that was in mind away. it's all about experimenting with logic...and getting help when necessary. i did ask gemini about my errors and how to code in animation but all of it has human input in actual logical writing (gemini can be helpful but lots of the times it would tweak things that would crash the whole game, figured those out on my own)
+#NOTE: planning the structure happened while i was in university taking my "Software Engineering" class, took my mini notebook out and started drawing the flow in a flowchart manner.

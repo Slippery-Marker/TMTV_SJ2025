@@ -58,7 +58,6 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.7887588, 0.722154, 5
 
 [node name="key" parent="." instance=ExtResource("4_wattf")]
 transform = Transform3D(2.445, 0, 0, 0, 2.445, 0, 0, 0, 2.445, -6.766925, 0.7026572, 5.6369376)
-behavior = 0
 
 [node name="door" parent="." instance=ExtResource("6_jk60j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.905409, 0, 1.27)
@@ -77,3 +76,19 @@ behavior = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 2.3283064e-10, 0, -2.3283064e-10, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_jk60j")
+
+[node name="tape3" parent="." instance=ExtResource("3_8kuwg")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.7887588, 0.722154, 7.0898705)
+
+[node name="tape4" parent="." instance=ExtResource("3_8kuwg")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.7887588, 0.722154, 7.872137)
+
+[node name="tape2" parent="." instance=ExtResource("3_8kuwg")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.7887588, 0.722154, 6.3218374)
+
+[node name="door2" parent="." instance=ExtResource("6_jk60j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.905409, 0, -0.5660471)
+behavior = 5
+
+[node name="tv2" parent="." instance=ExtResource("4_oteci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7637153, 0.29529965, 9.404962)

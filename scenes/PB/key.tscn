@@ -11,8 +11,12 @@ script = ExtResource("2_j61fo")
 behavior = 2
 _animator = 1
 
+[node name="collision" parent="Cube" index="0"]
+collision_layer = 0
+
 [node name="collision" type="StaticBody3D" parent="Cube/collision" index="1"]
 transform = Transform3D(5.5658154, 0, 0, 0, 2.7829077, 0, 0, 0, 1.1251245, 0, 0, 0)
+collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cube/collision/collision" index="0"]
 shape = SubResource("ConcavePolygonShape3D_hu8sd")
