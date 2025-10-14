@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dnjra2ol5vbe8"]
+[gd_scene load_steps=12 format=3 uid="uid://dnjra2ol5vbe8"]
 
 [ext_resource type="Script" uid="uid://i3y07yc7nimg" path="res://programs/object_brain.gd" id="1_1m5gc"]
 [ext_resource type="PackedScene" uid="uid://xgxdbavmpxxa" path="res://scenes/PB/Player.tscn" id="1_cmgem"]
@@ -24,6 +24,8 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cmgem"]
 albedo_color = Color(1, 0.47058824, 1, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_jk60j"]
+
 [node name="test" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -44,14 +46,6 @@ size = Vector3(50, 0.1, 50)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5596073, 4.665453)
 mouse_sensitivity = 0.3
 
-[node name="TestObject" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9999945, 0.0033161195, 0, -0.0033161195, 0.9999945, -11.70214, 0.6882864, -12.841734)
-material_override = SubResource("StandardMaterial3D_cmgem")
-use_collision = true
-collision_mask = 0
-script = ExtResource("1_1m5gc")
-behavior = 4
-
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(0.21, 0, 0, 0, 1, 0, 0, 0, 1, -11.185597, 1.1136947, -12.8467865)
 use_collision = true
@@ -68,3 +62,18 @@ behavior = 0
 
 [node name="door" parent="." instance=ExtResource("6_jk60j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.905409, 0, 1.27)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999944, 0.003316119, 0, -0.003316119, 0.9999944, -4.776402, 1.5664766, -12.841734)
+
+[node name="TestObject" type="CSGBox3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.3283064e-10, 0, -2.3283064e-10, 1.0000001, 4.7683716e-07, 0, 0)
+material_override = SubResource("StandardMaterial3D_cmgem")
+use_collision = true
+collision_mask = 0
+script = ExtResource("1_1m5gc")
+behavior = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.3283064e-10, 0, -2.3283064e-10, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_jk60j")

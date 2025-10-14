@@ -1,7 +1,7 @@
 class_name object_brain
 extends Node3D
 enum behaviour{tape=0,tv=1,key=2,lock=3,none=4,unlocked_door=5}
-enum animation{door=0,item=1,toggle=2,none=3}
+enum animation{door=0,item=1,toggle=2,rest=3,none=4}
 @export var behavior:behaviour=behaviour.tape
 @export var _animator:animation=animation.none
 @export var _if_it_has_a_lock: Node3D
@@ -47,6 +47,9 @@ func _process(delta: float) -> void:
 			var current_position = global_transform.origin
 			current_position.y = _initial_y
 			global_transform.origin = current_position
+			_animator=4
+		4:
+			pass
 func interact() -> void:
 	match behavior:
 		0:
@@ -84,6 +87,8 @@ func interact() -> void:
 				_set_behavior(5)
 			else:
 				printerr("INSUFFICIENT KEYS!")
+		4:
+			pass
 		5:
 			print("Running DOORUNLOCKED interaction logic.")
 			_animator=0
