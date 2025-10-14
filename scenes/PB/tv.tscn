@@ -39,7 +39,13 @@ transform = Transform3D(-4.502273e-08, 0, 1, 0, 0.9, 0, -1.03, 0, -4.371139e-08,
 material_override = SubResource("StandardMaterial3D_fe3dp")
 mesh = SubResource("QuadMesh_wsbyd")
 
-[node name="SubViewport" type="SubViewport" parent="holder" index="0"]
+[node name="TvAudioStreamer" type="AudioStreamPlayer3D" parent="holder" index="0"]
+unique_name_in_owner = true
+volume_db = -30.0
+autoplay = true
+max_distance = 8.0
+
+[node name="SubViewport" type="SubViewport" parent="holder" index="1"]
 size = Vector2i(1280, 720)
 
 [node name="Control" type="Control" parent="holder/SubViewport" index="0"]
@@ -64,9 +70,3 @@ grow_vertical = 2
 volume_db = -80.0
 autoplay = true
 metadata/_edit_use_anchors_ = true
-
-[node name="TvAudioStreamer" type="AudioStreamPlayer3D" parent="holder" index="1"]
-unique_name_in_owner = true
-volume_db = -30.0
-autoplay = true
-max_distance = 8.0

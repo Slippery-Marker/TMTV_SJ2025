@@ -1,6 +1,5 @@
-[gd_scene load_steps=13 format=3 uid="uid://dnjra2ol5vbe8"]
+[gd_scene load_steps=12 format=3 uid="uid://dnjra2ol5vbe8"]
 
-[ext_resource type="Script" uid="uid://i3y07yc7nimg" path="res://programs/object_brain.gd" id="1_1m5gc"]
 [ext_resource type="PackedScene" uid="uid://xgxdbavmpxxa" path="res://scenes/PB/Player.tscn" id="1_cmgem"]
 [ext_resource type="PackedScene" uid="uid://b4v785wd24pnv" path="res://scenes/PB/tape.tscn" id="3_8kuwg"]
 [ext_resource type="PackedScene" uid="uid://dsl43yp2l26ui" path="res://scenes/PB/tv.tscn" id="4_oteci"]
@@ -37,8 +36,11 @@ environment = SubResource("Environment_q1p36")
 transform = Transform3D(-0.86005086, -0.3713955, 0.3498255, 0.10155023, 0.54732573, 0.8307359, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 light_color = Color(1, 0.9490196, 0.7294118, 1)
 shadow_enabled = true
-shadow_blur = 0.0
-directional_shadow_max_distance = 412.0
+shadow_blur = 0.08
+directional_shadow_blend_splits = true
+directional_shadow_fade_start = 0.46
+directional_shadow_max_distance = 20.0
+directional_shadow_pancake_size = 0.0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05234003, 0)
@@ -67,14 +69,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.905409, 0, 1.27)
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999944, 0.003316119, 0, -0.003316119, 0.9999944, -4.776402, 1.5664766, -12.841734)
 mass = 0.01
+can_sleep = false
 
 [node name="TestObject" type="CSGBox3D" parent="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.3283064e-10, 0, -2.3283064e-10, 1.0000001, 4.7683716e-07, 0, 0)
 material_override = SubResource("StandardMaterial3D_cmgem")
 use_collision = true
 collision_mask = 0
-script = ExtResource("1_1m5gc")
-behavior = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 2.3283064e-10, 0, -2.3283064e-10, 1, 0, 0, 0)
@@ -98,8 +99,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7637153, 0.29529965, 9.400
 
 [node name="RigidBody3D2" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.029303074, -10.465495)
+mass = 0.5
+can_sleep = false
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="RigidBody3D2"]
+use_collision = true
+smooth_faces = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
 shape = SubResource("SphereShape3D_jk60j")
@@ -115,3 +120,26 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4.939906, 0.722154, 7.
 
 [node name="tape8" parent="." instance=ExtResource("3_8kuwg")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4.256425, 0.722154, 7.0898705)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2038574, -25)
+use_collision = true
+size = Vector3(50.267334, 6.592285, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25, 3, 0)
+use_collision = true
+size = Vector3(50.267334, 6.592285, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -25, 3, 0)
+use_collision = true
+size = Vector3(50.267334, 6.592285, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.204, 25)
+use_collision = true
+size = Vector3(50.267334, 6.592285, 1)
+
+[node name="tv3" parent="." instance=ExtResource("4_oteci")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3707976, 0.29529965, 9.0619135)

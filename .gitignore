@@ -20,3 +20,4 @@ mono_crash.*.json
 assets/images/brand
 /assets/Sounds
 /assets/Videos
+export_presets.cfg

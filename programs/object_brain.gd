@@ -25,6 +25,7 @@ var _door_audio_player:AudioStreamPlayer3D
 var _rng:int
 var _initial_y:float=0
 var _static_initial_y:float=0
+@onready var _holder=%holder
 static var _inv:inventory_manager=inventory_manager.new()
 func _ready() -> void:
 	_initial_y = global_transform.origin.y
@@ -42,7 +43,7 @@ func _ready() -> void:
 			_set_rng_tv()
 			_set_rng_tape()
 			if %TvStreamer && %TvAudioStreamer:
-				%holder.hide()
+				_holder.hide()
 				_video_player=%TvStreamer
 				_audio_player=%TvAudioStreamer
 				_video_player.finished.connect(_on_video_finished)
@@ -60,7 +61,7 @@ func _on_video_finished():
 	_audio_player.stop()
 	_video_player.stream=null
 	_audio_player.stream=null
-	%holder.queue_free()
+	_holder.queue_free()
 func  _set_behavior(BEH:int):
 	@warning_ignore("int_as_enum_without_cast")
 	behavior=BEH
@@ -130,7 +131,7 @@ func interact():
 					queue_free()
 				elif _tape_rng_poolsize >=1:
 					print("Eh... ",_rng," is not a part of the the secret numbers gang")
-					%holder.show()
+					_holder.show()
 					_video_player.stream=_shared_tape_video_pool[_tape_rng]
 					_audio_player.stream=_shared_tape_audio_pool[_tape_rng]
 					print("Playing: ",_tape_rng)

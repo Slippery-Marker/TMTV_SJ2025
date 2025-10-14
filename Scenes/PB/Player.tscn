@@ -1,8 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://xgxdbavmpxxa"]
+[gd_scene load_steps=5 format=3 uid="uid://xgxdbavmpxxa"]
 
 [ext_resource type="Script" uid="uid://bud7dup4vpwq6" path="res://programs/player_brain.gd" id="1_t4ird"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_of6eb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_t4ird"]
+font_size = 51
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_65w3o"]
+outline_size = 5
+outline_color = Color(0.7714399, 0.46423644, 0.1885441, 1)
 
 [node name="PlayerController" type="CharacterBody3D"]
 script = ExtResource("1_t4ird")
@@ -17,7 +26,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="PlayerCamera" type="Camera3D" parent="CameraController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.48721588)
+current = true
 fov = 90.0
+far = 60.0
 
 [node name="PlayerRay" type="RayCast3D" parent="CameraController/PlayerCamera"]
 unique_name_in_owner = true
@@ -27,6 +38,22 @@ collide_with_areas = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
+
+[node name="BoxContainer2" type="BoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/BoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "."
+label_settings = SubResource("LabelSettings_t4ird")
 
 [node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
 anchors_preset = 8
@@ -48,6 +75,7 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-text = "PRESS [F] TO PICK UP"
+text = "PRESS [F] TO INTERACT"
+label_settings = SubResource("LabelSettings_65w3o")
 horizontal_alignment = 1
 vertical_alignment = 1

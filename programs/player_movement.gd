@@ -22,14 +22,13 @@ func handle_movement(delta: float) -> void:
 		_player.velocity.x = direction.x * SPEED
 		_player.velocity.z = direction.z * SPEED
 	else:
-		_player.velocity.x = move_toward(_player.velocity.x, 0, SPEED)
-		_player.velocity.z = move_toward(_player.velocity.z, 0, SPEED)
+		#NOTE: thanks to LesusX for his BASED github repo with this one (lerp)
+		_player.velocity.x = lerp(_player.velocity.x, direction.x* SPEED,delta*7)
+		_player.velocity.z = lerp(_player.velocity.z, direction.z *SPEED,delta*7)
 	_player.move_and_slide()
-	# Assume 'velocity' is the Vector3 property on your CharacterBody3D script
-# that is passed to move_and_slide().
-#NOTE: fucked up physics push system that gemini wrote like why does it work this BAD
+#NOTE: fucked up physics push system that gemini wrote, like why does it work this BAD
 	for i in _player.get_slide_collision_count():
-		const PUSH_FACTOR = 2000
+		const PUSH_FACTOR = 15
 		var collision = _player.get_slide_collision(i)
 	# Check if the collided object is a RigidBody3D
 		if collision.get_collider() is RigidBody3D:
