@@ -28,7 +28,7 @@ func handle_movement(delta: float) -> void:
 	_player.move_and_slide()
 #NOTE: fucked up physics push system that gemini wrote, like why does it work this BAD
 	for i in _player.get_slide_collision_count():
-		const PUSH_FACTOR = 15
+		const PUSH_FACTOR = 2000
 		var collision = _player.get_slide_collision(i)
 	# Check if the collided object is a RigidBody3D
 		if collision.get_collider() is RigidBody3D:

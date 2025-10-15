@@ -1,6 +1,6 @@
 class_name object_brain
 extends Node3D
-enum behaviour{tape=0,tv=1,key=2,lock=3,none=4,unlocked_door=5}
+enum behaviour{tape=0,tv=1,key=2,lock=3,nonekey=4,unlocked_door=5,tv_but_no_tape=6,lock_but_no_key=7,video_cycler=8,nonetv=9}
 enum animation{door=0,item=1,toggle=2,rest=3,none=4}
 static var _shared_tape_video_pool:Array[VideoStream]
 static var _shared_tape_audio_pool:Array[AudioStream]
@@ -25,7 +25,7 @@ var _door_audio_player:AudioStreamPlayer3D
 var _rng:int
 var _initial_y:float=0
 var _static_initial_y:float=0
-@onready var _holder=%holder
+var _holder
 static var _inv:inventory_manager=inventory_manager.new()
 func _ready() -> void:
 	_initial_y = global_transform.origin.y
@@ -41,8 +41,8 @@ func _ready() -> void:
 				_is_pool_initialized = true
 			_tape_rng_poolsize=_shared_tape_video_pool.size()
 			_set_rng_tv()
-			_set_rng_tape()
 			if %TvStreamer && %TvAudioStreamer:
+				_holder=%holder
 				_holder.hide()
 				_video_player=%TvStreamer
 				_audio_player=%TvAudioStreamer
@@ -56,12 +56,42 @@ func _ready() -> void:
 				_door_audio_player=%DoorAudioStreamer
 			if _if_it_has_a_lock && is_instance_valid(_if_it_has_a_lock):
 				_if_it_has_a_lock.queue_free()
+		6:
+			if %TvStreamer && %TvAudioStreamer:
+				_video_player=%TvStreamer
+				_audio_player=%TvAudioStreamer
+				_holder=%holder
+				_holder.hide()
+			if !_is_pool_initialized:
+				_shared_tape_video_pool.assign(video_streams_tape)
+				_shared_tape_audio_pool.assign(audio_streams_tape)
+				_is_pool_initialized = true
+			_tape_rng_poolsize=_shared_tape_video_pool.size()
+			_video_player.finished.connect(_on_video_finished)
+			print("Array Size? ",_tape_rng_poolsize," running in ready")
+			_set_rng_tape()
+		7:
+			if %DoorAudioStreamer:
+				_door_audio_player=%DoorAudioStreamer
+		8:
+			if %TvStreamer && %TvAudioStreamer:
+				_video_player=%TvStreamer
+				_audio_player=%TvAudioStreamer
+				_holder=%holder
+				_holder.hide()
+			if !_is_pool_initialized:
+				_shared_tape_video_pool.assign(video_streams_tape)
+				_shared_tape_audio_pool.assign(audio_streams_tape)
+				_is_pool_initialized = true
+			_tape_rng_poolsize=_shared_tape_video_pool.size()
+			_video_player.finished.connect(_on_video_finished)
+			print("Array Size? ",_tape_rng_poolsize," running in ready")
 func _on_video_finished():
 	_video_player.stop()
 	_audio_player.stop()
 	_video_player.stream=null
 	_audio_player.stream=null
-	_holder.queue_free()
+	_holder.hide()
 func  _set_behavior(BEH:int):
 	@warning_ignore("int_as_enum_without_cast")
 	behavior=BEH
@@ -71,12 +101,12 @@ func _set_animator(ANI:int):
 func _generate_random_num(min_val: int, max_val: int) -> int:
 	return randi() % (max_val - min_val + 1) + min_val
 func _gen_rand_num_tape(min_val:int,max_val:int)->int:
-	return randi()%(max_val-min_val)
+	return randi()%(max_val-min_val+1)
 func _set_rng_tape():
 	_tape_rng_poolsize=_shared_tape_video_pool.size()
 	_tape_rng_poolpointer=_tape_rng_poolsize-1
 	print("pool size ",_tape_rng_poolsize," beginner pointer ",_tape_rng_poolpointer)
-	if _tape_rng_poolsize>1:
+	if _tape_rng_poolsize>0:
 		_tape_rng=_gen_rand_num_tape(0,_tape_rng_poolpointer)
 		print("current pointer on ",_tape_rng)
 	else:
@@ -107,6 +137,25 @@ func _process(delta: float) -> void:
 			_set_animator(4)
 		4:
 			pass
+	match behavior:
+		1:
+			if _inv.get_tape()==0:
+				_set_behavior(6)
+		6:
+			if _inv.get_tape()>0:
+				_set_behavior(1)
+		4:
+			if _inv.get_key()==0:
+				_set_behavior(7)
+		7:
+			if _inv.get_key()>0:
+				_set_behavior(3)
+		8:
+			_set_behavior(9)
+			await _video_player.finished
+			_set_behavior(6)
+		9:
+			pass
 func interact():
 	match behavior:
 		0:
@@ -118,9 +167,11 @@ func interact():
 		1:
 			print("Running TV interaction logic.")
 			if _inv.get_tape()!=0:
+				_set_rng_tape()
 				_inv.use_tape()
 				print("(tapes remaining: ",_inv.get_tape(),")")
 				if _rng==23 || _rng== 10 || _rng==81:
+					_set_behavior(9)
 					print("WOULD YOU LOOK AT THAT! THE WORLD IS not revolving its the TV!!!",_rng)
 					_set_animator(1)
 					_audio_player.stream=normal_audio[0]
@@ -130,6 +181,7 @@ func interact():
 					await _audio_player.finished
 					queue_free()
 				elif _tape_rng_poolsize >=1:
+					_set_behavior(8)
 					print("Eh... ",_rng," is not a part of the the secret numbers gang")
 					_holder.show()
 					_video_player.stream=_shared_tape_video_pool[_tape_rng]
@@ -139,19 +191,17 @@ func interact():
 					_audio_player.play()
 					print("items before delete: ",_shared_tape_video_pool)
 					if _tape_rng_poolsize==1:
+						printerr("LAST FILE, CANNOT DELETE")
 						print("items in poolsize check: ",_shared_tape_video_pool)
-						pass
 					else:
 						_shared_tape_video_pool.remove_at(_tape_rng)
 						_shared_tape_audio_pool.remove_at(_tape_rng)
-						print("items after delete: ",_shared_tape_video_pool)
-					randomize()
+						_set_rng_tape()
+						randomize()
+						print("Array Size? ",_tape_rng_poolsize," after delete")
 					_set_rng_tv()
-					_set_rng_tape()
-					print("Array Size? ",_tape_rng_poolsize," after delete")
-				_set_behavior(4)
 			else:
-				printerr("INSUFFICIENT TAPES!")
+				_set_behavior(6)
 		2:
 			print("Running KEY interaction logic.")
 			_inv.collect_key()
@@ -166,6 +216,7 @@ func interact():
 				if _if_it_has_a_lock && is_instance_valid(_if_it_has_a_lock):
 					_door_audio_player.stream=normal_audio[1]
 					_door_audio_player.play()
+					_set_behavior(9)
 					await _door_audio_player.finished
 					_if_it_has_a_lock.queue_free()
 				_set_behavior(5)
@@ -177,6 +228,7 @@ func interact():
 			print("Running DOORUNLOCKED interaction logic.")
 			_door_audio_player.stream=normal_audio[0]
 			_door_audio_player.play()
+			_set_behavior(9)
 			await _door_audio_player.finished
 			_set_animator(0)
 func get_behavior():

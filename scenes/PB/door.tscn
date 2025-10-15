@@ -9,7 +9,7 @@
 [node name="door" node_paths=PackedStringArray("_if_it_has_a_lock") instance=ExtResource("1_pfsu5")]
 script = ExtResource("2_dxn36")
 normal_audio = Array[AudioStream]([ExtResource("11_jyclv"), ExtResource("4_pp0si")])
-behavior = 3
+behavior = 7
 _if_it_has_a_lock = NodePath("lock")
 
 [node name="lock" parent="." index="2" instance=ExtResource("3_nwegv")]

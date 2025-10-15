@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dsl43yp2l26ui"]
+[gd_scene load_steps=15 format=3 uid="uid://dsl43yp2l26ui"]
 
 [ext_resource type="PackedScene" uid="uid://dh13cl0g7glm1" path="res://assets/3D/Models/tv.glb" id="1_4o2nj"]
 [ext_resource type="Script" uid="uid://i3y07yc7nimg" path="res://programs/object_brain.gd" id="2_41xin"]
@@ -7,8 +7,10 @@
 [ext_resource type="AudioStream" uid="uid://b1ffxhxqmy0lj" path="res://assets/Videos/pinkiepies.ogg" id="4_fe3dp"]
 [ext_resource type="AudioStream" uid="uid://dy66ml1ihfqoh" path="res://assets/Sounds/getout.mp3" id="5_2t2yq"]
 [ext_resource type="VideoStream" uid="uid://cmgaxjh3uvq6l" path="res://assets/Videos/warzn2fne.ogv" id="5_jgidw"]
+[ext_resource type="VideoStream" uid="uid://b2t3jm47jlrn1" path="res://assets/Videos/dead_lesnek.ogv" id="6_0a738"]
 [ext_resource type="AudioStream" uid="uid://bhupy23bu181m" path="res://assets/Videos/sponge.ogg" id="7_0a738"]
 [ext_resource type="AudioStream" uid="uid://cu785xhwst6vw" path="res://assets/Videos/warzn2fne.ogg" id="8_0rkvf"]
+[ext_resource type="AudioStream" uid="uid://dkylo7r41o7mv" path="res://assets/Videos/dead_lesnek.ogg" id="10_0rkvf"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_wsbyd"]
 viewport_path = NodePath("holder/SubViewport")
@@ -24,10 +26,10 @@ size = Vector2(1.9, 1.08)
 
 [node name="tv" instance=ExtResource("1_4o2nj")]
 script = ExtResource("2_41xin")
-video_streams_tape = Array[VideoStream]([ExtResource("3_wsbyd"), ExtResource("4_dmm2f"), ExtResource("5_jgidw")])
-audio_streams_tape = Array[AudioStream]([ExtResource("4_fe3dp"), ExtResource("7_0a738"), ExtResource("8_0rkvf")])
+video_streams_tape = Array[VideoStream]([ExtResource("3_wsbyd"), ExtResource("4_dmm2f"), ExtResource("5_jgidw"), ExtResource("6_0a738")])
+audio_streams_tape = Array[AudioStream]([ExtResource("4_fe3dp"), ExtResource("7_0a738"), ExtResource("8_0rkvf"), ExtResource("10_0rkvf")])
 normal_audio = Array[AudioStream]([ExtResource("5_2t2yq")])
-behavior = 1
+behavior = 6
 rotation_speed = 10.0
 
 [node name="collision" parent="TV" index="0"]

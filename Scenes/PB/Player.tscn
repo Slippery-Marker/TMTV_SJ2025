@@ -1,20 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://xgxdbavmpxxa"]
+[gd_scene load_steps=7 format=3 uid="uid://xgxdbavmpxxa"]
 
 [ext_resource type="Script" uid="uid://bud7dup4vpwq6" path="res://programs/player_brain.gd" id="1_t4ird"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_of6eb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t4ird"]
-font_size = 51
-outline_size = 10
+font_size = 21
+outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_bvl60"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.6509804)
+
+[sub_resource type="LabelSettings" id="LabelSettings_55ydk"]
+outline_size = 2
+outline_color = Color(1, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.6509804)
+
 [sub_resource type="LabelSettings" id="LabelSettings_65w3o"]
-outline_size = 5
-outline_color = Color(0.7714399, 0.46423644, 0.1885441, 1)
+outline_size = 2
+outline_color = Color(1, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.6509804)
 
 [node name="PlayerController" type="CharacterBody3D"]
 script = ExtResource("1_t4ird")
+camera_rotation_up = null
+camera_rotation_down = null
+mouse_sensitivity = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -76,6 +93,58 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "PRESS [F] TO INTERACT"
+label_settings = SubResource("LabelSettings_bvl60")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoxContainer3" type="BoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = 23.0
+offset_right = 123.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="NoTape" type="Label" parent="CanvasLayer/BoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "NEED TAPES!!
+(YOU HAVE NONE (YOU BROKE))"
+label_settings = SubResource("LabelSettings_55ydk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoxContainer4" type="BoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = 23.0
+offset_right = 133.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="NoKey" type="Label" parent="CanvasLayer/BoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "NEED KEYS!!
+(YOU HAVE NONE (YOU BROKE))"
 label_settings = SubResource("LabelSettings_65w3o")
 horizontal_alignment = 1
 vertical_alignment = 1

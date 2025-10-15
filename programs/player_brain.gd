@@ -18,7 +18,7 @@ func _ready() -> void:
 	mmouse.set_camera_player_node(%CameraController,self)
 	mmouse.set_rotation_limit(camera_rotation_up,camera_rotation_down)
 	mmouse.set_mouse_sensitivity(mouse_sensitivity)
-	interact.set_raycast(%PlayerRay, %InteractText)
+	interact.set_raycast(%PlayerRay, %InteractText,%NoTape,%NoKey)
 func _process(delta: float) -> void:
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		mmouse.update_camera()
