@@ -12,6 +12,12 @@ normal_audio = Array[AudioStream]([ExtResource("11_jyclv"), ExtResource("4_pp0si
 behavior = 7
 _if_it_has_a_lock = NodePath("lock")
 
+[node name="Cube" parent="." index="0"]
+unique_name_in_owner = true
+
+[node name="collision" parent="." index="1"]
+unique_name_in_owner = true
+
 [node name="lock" parent="." index="2" instance=ExtResource("3_nwegv")]
 transform = Transform3D(1.515, 0, 0, 0, 1.515, 0, 0, 0, 1.515, 0.2, 1, 0)
 script = ExtResource("2_dxn36")

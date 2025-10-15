@@ -38,9 +38,7 @@ light_color = Color(1, 0.9490196, 0.7294118, 1)
 shadow_enabled = true
 shadow_blur = 0.08
 directional_shadow_blend_splits = true
-directional_shadow_fade_start = 0.46
-directional_shadow_max_distance = 20.0
-directional_shadow_pancake_size = 0.0
+directional_shadow_max_distance = 50.0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05234003, 0)

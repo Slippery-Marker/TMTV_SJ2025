@@ -106,7 +106,7 @@ func _set_rng_tape():
 	_tape_rng_poolsize=_shared_tape_video_pool.size()
 	_tape_rng_poolpointer=_tape_rng_poolsize-1
 	print("pool size ",_tape_rng_poolsize," beginner pointer ",_tape_rng_poolpointer)
-	if _tape_rng_poolsize>0:
+	if _tape_rng_poolsize>1:
 		_tape_rng=_gen_rand_num_tape(0,_tape_rng_poolpointer)
 		print("current pointer on ",_tape_rng)
 	else:
@@ -119,7 +119,7 @@ func _set_rng_tv():
 func _process(delta: float) -> void:
 	match _animator:
 		0:
-				queue_free()
+			queue_free()
 		1:
 			rotate_y(delta * rotation_speed * TAU)
 			var time = Time.get_ticks_usec() / 1000000.0
@@ -229,6 +229,8 @@ func interact():
 			_door_audio_player.stream=normal_audio[0]
 			_door_audio_player.play()
 			_set_behavior(9)
+			%Cube.queue_free()
+			%collision.queue_free()
 			await _door_audio_player.finished
 			_set_animator(0)
 func get_behavior():
