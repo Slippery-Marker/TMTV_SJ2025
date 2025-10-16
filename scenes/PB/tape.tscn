@@ -1,13 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4v785wd24pnv"]
+[gd_scene load_steps=4 format=3 uid="uid://b4v785wd24pnv"]
 
 [ext_resource type="PackedScene" uid="uid://cp5kn7p61cuiy" path="res://assets/3D/Models/tape.glb" id="1_e7mg4"]
 [ext_resource type="Script" uid="uid://i3y07yc7nimg" path="res://programs/object_brain.gd" id="2_qbj4d"]
+[ext_resource type="AudioStream" uid="uid://dy66ml1ihfqoh" path="res://assets/Sounds/getout.mp3" id="3_2lxfk"]
 
 [node name="tape" instance=ExtResource("1_e7mg4")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("2_qbj4d")
+normal_audio = Array[AudioStream]([ExtResource("3_2lxfk")])
 _animator = 1
 
+[node name="Cube" parent="." index="0"]
+unique_name_in_owner = true
+
 [node name="collision" parent="." index="1"]
+unique_name_in_owner = true
 transform = Transform3D(0.162, 0, 0, 0, 0.4, 0, 0, 0, 0.714, 0, 0, 0)
 collision_layer = 2
+
+[node name="DoorAudioStreamer" type="AudioStreamPlayer3D" parent="." index="2"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.514374, 1.107202, 0)
+volume_db = -3.0
+autoplay = true
+max_distance = 3.0

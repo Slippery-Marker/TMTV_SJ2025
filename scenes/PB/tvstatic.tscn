@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvmyk3ulivepn"]
+
+[ext_resource type="PackedScene" uid="uid://dh13cl0g7glm1" path="res://assets/3D/Models/tv.glb" id="1_tou4h"]
+[ext_resource type="Material" uid="uid://bpdwm6tw5ptdn" path="res://scenes/PB/tv.tres" id="2_4jmip"]
+[ext_resource type="VideoStream" uid="uid://dhsfmtnduvl7o" path="res://assets/Videos/tvstatic.ogv" id="2_5xw2d"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wsbyd"]
+viewport_path = NodePath("holder/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fe3dp"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_wsbyd")
+emission_enabled = true
+emission_energy_multiplier = 0.5
+emission_texture = SubResource("ViewportTexture_wsbyd")
+
+[sub_resource type="QuadMesh" id="QuadMesh_wsbyd"]
+material = ExtResource("2_4jmip")
+size = Vector2(1.9, 1.08)
+
+[node name="tv" instance=ExtResource("1_tou4h")]
+
+[node name="collision" parent="TV" index="0"]
+collision_layer = 3
+
+[node name="holder" type="MeshInstance3D" parent="." index="1"]
+unique_name_in_owner = true
+transform = Transform3D(-4.502273e-08, 0, 1, 0, 0.9, 0, -1.03, 0, -4.371139e-08, 0.019896146, 0.6, 5.290763e-10)
+material_override = SubResource("StandardMaterial3D_fe3dp")
+mesh = SubResource("QuadMesh_wsbyd")
+
+[node name="SubViewport" type="SubViewport" parent="holder" index="0"]
+size = Vector2i(1280, 720)
+
+[node name="Control" type="Control" parent="holder/SubViewport" index="0"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="TvStreamer" type="VideoStreamPlayer" parent="holder/SubViewport/Control" index="0"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("2_5xw2d")
+volume_db = -80.0
+autoplay = true
+loop = true
+metadata/_edit_use_anchors_ = true

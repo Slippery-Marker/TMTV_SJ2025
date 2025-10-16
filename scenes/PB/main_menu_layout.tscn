@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://2iq33al6kehl"]
+
+[ext_resource type="FontFile" uid="uid://bxlcuwat57ai3" path="res://assets/fonts/Karla-VariableFont_wght.ttf" id="1_ki7sq"]
+[ext_resource type="Script" uid="uid://bkpbjprvcm4o1" path="res://programs/button_brain.gd" id="2_yihlw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hsxwp"]
+font = ExtResource("1_ki7sq")
+font_size = 36
+shadow_size = 15
+shadow_color = Color(0, 0, 0, 0.4392157)
+shadow_offset = Vector2(-2.565, -0.155)
+
+[node name="MainMenuLayout" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 80
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="GameName" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "THE (MISHAPFUL...?) TV"
+label_settings = SubResource("LabelSettings_hsxwp")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+script = ExtResource("2_yihlw")
+
+[node name="PlayButton" type="Button" parent="Control/MarginContainer/ButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_ki7sq")
+theme_override_font_sizes/font_size = 21
+text = "Demo"
+
+[node name="ExitButton" type="Button" parent="Control/MarginContainer/ButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_ki7sq")
+theme_override_font_sizes/font_size = 21
+text = "Exit"
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[connection signal="pressed" from="Control/MarginContainer/ButtonContainer/PlayButton" to="Control/MarginContainer/ButtonContainer" method="_on_play_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/ButtonContainer/ExitButton" to="Control/MarginContainer/ButtonContainer" method="_on_exit_button_pressed"]

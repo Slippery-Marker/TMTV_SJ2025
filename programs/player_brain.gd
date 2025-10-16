@@ -18,12 +18,14 @@ func _ready() -> void:
 	mmouse.set_camera_player_node(%CameraController,self)
 	mmouse.set_rotation_limit(camera_rotation_up,camera_rotation_down)
 	mmouse.set_mouse_sensitivity(mouse_sensitivity)
-	interact.set_raycast(%PlayerRay, %InteractText,%NoTape,%NoKey)
+	interact.set_raycast(%PlayerRay, %InteractText,%NoTape,%NoKey,%Label2,%Label3,%Label4)
 func _process(delta: float) -> void:
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		mmouse.update_camera()
 		movement.handle_movement(delta)
 		interact._process()
+func _physics_process(delta: float) -> void:
+	movement.physics()
 func _input(event):
 	#NOTE: Closes game with ESC.
 	if event.is_action_pressed("exit"):

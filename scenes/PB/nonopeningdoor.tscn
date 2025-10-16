@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjfwxjpwoq7nl"]
+
+[ext_resource type="PackedScene" uid="uid://bctrtj3mlaghc" path="res://assets/3D/Models/door.glb" id="1_eus4d"]
+[ext_resource type="PackedScene" uid="uid://bhuxg43ntq2qv" path="res://scenes/PB/lock.tscn" id="2_42s1n"]
+
+[node name="door" instance=ExtResource("1_eus4d")]
+
+[node name="Cube" parent="." index="0"]
+unique_name_in_owner = true
+
+[node name="collision" parent="." index="1"]
+unique_name_in_owner = true
+
+[node name="lock" parent="." index="2" instance=ExtResource("2_42s1n")]
+transform = Transform3D(0.965, 0, 0, 0, 0.965, 0, 0, 0, 0.965, 0.2, 0.71116376, 0.44292998)

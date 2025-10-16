@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://xgxdbavmpxxa"]
+[gd_scene load_steps=11 format=3 uid="uid://xgxdbavmpxxa"]
 
 [ext_resource type="Script" uid="uid://bud7dup4vpwq6" path="res://programs/player_brain.gd" id="1_t4ird"]
 
@@ -27,11 +27,26 @@ outline_color = Color(1, 0, 0, 1)
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 0.6509804)
 
+[sub_resource type="LabelSettings" id="LabelSettings_b5t3i"]
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.9882353)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hai4a"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y70dj"]
+outline_size = 3
+outline_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3lw8k"]
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+
 [node name="PlayerController" type="CharacterBody3D"]
 script = ExtResource("1_t4ird")
-camera_rotation_up = null
-camera_rotation_down = null
-mouse_sensitivity = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -42,7 +57,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="PlayerCamera" type="Camera3D" parent="CameraController"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.48721588)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
 current = true
 fov = 90.0
 far = 60.0
@@ -57,38 +72,28 @@ collide_with_areas = true
 follow_viewport_enabled = true
 
 [node name="BoxContainer2" type="BoxContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -123.0
+offset_right = 123.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="CanvasLayer/BoxContainer2"]
-layout_mode = 2
 size_flags_horizontal = 6
+size_flags_vertical = 6
+alignment = 1
+vertical = true
+
+[node name="Reticle" type="Label" parent="CanvasLayer/BoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
 text = "."
 label_settings = SubResource("LabelSettings_t4ird")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -80.5
-offset_top = 26.0
-offset_right = 80.5
-offset_bottom = 49.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 1
-
-[node name="InteractText" type="Label" parent="CanvasLayer/BoxContainer"]
+[node name="InteractText" type="Label" parent="CanvasLayer/BoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -97,23 +102,7 @@ label_settings = SubResource("LabelSettings_bvl60")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BoxContainer3" type="BoxContainer" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -123.0
-offset_top = 23.0
-offset_right = 123.0
-offset_bottom = 72.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 1
-
-[node name="NoTape" type="Label" parent="CanvasLayer/BoxContainer3"]
+[node name="NoTape" type="Label" parent="CanvasLayer/BoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -123,23 +112,7 @@ label_settings = SubResource("LabelSettings_55ydk")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BoxContainer4" type="BoxContainer" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -133.0
-offset_top = 23.0
-offset_right = 133.0
-offset_bottom = 72.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 1
-
-[node name="NoKey" type="Label" parent="CanvasLayer/BoxContainer4"]
+[node name="NoKey" type="Label" parent="CanvasLayer/BoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -148,3 +121,53 @@ text = "NEED KEYS!!
 label_settings = SubResource("LabelSettings_65w3o")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
+offset_right = 1100.0
+offset_bottom = 23.0
+vertical = true
+
+[node name="Label" type="Label" parent="CanvasLayer/BoxContainer"]
+layout_mode = 2
+text = "  *>Collect 5 Tapes"
+label_settings = SubResource("LabelSettings_b5t3i")
+
+[node name="Label2" type="Label" parent="CanvasLayer/BoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "     ^...You did? okay but have you watched them on the tv? the tv is in the living room in the first floor, you know where the ball is?"
+label_settings = SubResource("LabelSettings_hai4a")
+
+[node name="Label3" type="Label" parent="CanvasLayer/BoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "     ^ YOU WATCHED ALL OF THEM?...im sorry thats all i can offer for now, check out my socials and talk to me for news on what im cooking for later *cries*"
+label_settings = SubResource("LabelSettings_hai4a")
+
+[node name="Label4" type="Label" parent="CanvasLayer/BoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "   ...Looks like you got a secret ending where the MAIN FUCKING POINT OF THE GAME IS MISSING NOW, restart the game gang :p"
+label_settings = SubResource("LabelSettings_y70dj")
+
+[node name="BoxContainer3" type="BoxContainer" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/BoxContainer3"]
+layout_mode = 2
+text = "Mouse Lock: TAB
+Quit Game: ESC
+Jump and Walk (for pushing objects): Space  
+Interact: F
+5 TAPES 2  KEYS"
+label_settings = SubResource("LabelSettings_3lw8k")

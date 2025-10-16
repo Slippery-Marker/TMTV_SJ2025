@@ -1,7 +1,7 @@
 class_name player_movement
 # NOTE: Does NOT need to be inheriting from the node it's trying to affect. also RefCounted is kinda cool.
 extends RefCounted 
-const SPEED = 5.0
+const SPEED = 3.0
 const JUMP_VELOCITY = 4.5
 var _player: CharacterBody3D 
 # PlayerController's self Getter Setter within player_brain.gd
@@ -23,12 +23,13 @@ func handle_movement(delta: float) -> void:
 		_player.velocity.z = direction.z * SPEED
 	else:
 		#NOTE: thanks to LesusX for his BASED github repo with this one (lerp)
-		_player.velocity.x = lerp(_player.velocity.x, direction.x* SPEED,delta*7)
-		_player.velocity.z = lerp(_player.velocity.z, direction.z *SPEED,delta*7)
+		_player.velocity.x = lerp(_player.velocity.x, direction.x* SPEED,delta*15)
+		_player.velocity.z = lerp(_player.velocity.z, direction.z *SPEED,delta*15)
 	_player.move_and_slide()
 #NOTE: fucked up physics push system that gemini wrote, like why does it work this BAD
+func physics():
 	for i in _player.get_slide_collision_count():
-		const PUSH_FACTOR = 2000
+		const PUSH_FACTOR = 100
 		var collision = _player.get_slide_collision(i)
 	# Check if the collided object is a RigidBody3D
 		if collision.get_collider() is RigidBody3D:

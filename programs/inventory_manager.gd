@@ -18,7 +18,9 @@ func use_tape():
 	_tape=_tape-1
 func use_key():
 	_key=_key-1
-func total_tape():
+func total_tape()->int:
 	return _tape_sum
-func total_key():
+func total_key()->int:
 	return _key_sum
+func _confirmation():
+	print("processing inventory call")

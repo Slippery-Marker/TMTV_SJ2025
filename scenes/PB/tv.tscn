@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dsl43yp2l26ui"]
+[gd_scene load_steps=17 format=3 uid="uid://dsl43yp2l26ui"]
 
 [ext_resource type="PackedScene" uid="uid://dh13cl0g7glm1" path="res://assets/3D/Models/tv.glb" id="1_4o2nj"]
 [ext_resource type="Script" uid="uid://i3y07yc7nimg" path="res://programs/object_brain.gd" id="2_41xin"]
@@ -9,8 +9,10 @@
 [ext_resource type="VideoStream" uid="uid://cmgaxjh3uvq6l" path="res://assets/Videos/warzn2fne.ogv" id="5_jgidw"]
 [ext_resource type="VideoStream" uid="uid://b2t3jm47jlrn1" path="res://assets/Videos/dead_lesnek.ogv" id="6_0a738"]
 [ext_resource type="AudioStream" uid="uid://bhupy23bu181m" path="res://assets/Videos/sponge.ogg" id="7_0a738"]
+[ext_resource type="VideoStream" uid="uid://dsm45p84w13wv" path="res://assets/Videos/tekkenreview_uncleyandere.ogv" id="7_muscp"]
 [ext_resource type="AudioStream" uid="uid://cu785xhwst6vw" path="res://assets/Videos/warzn2fne.ogg" id="8_0rkvf"]
 [ext_resource type="AudioStream" uid="uid://dkylo7r41o7mv" path="res://assets/Videos/dead_lesnek.ogg" id="10_0rkvf"]
+[ext_resource type="AudioStream" uid="uid://bv1t3g3uej5c" path="res://assets/Videos/tekkenreview_uncleyandere.ogg" id="12_tmniw"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_wsbyd"]
 viewport_path = NodePath("holder/SubViewport")
@@ -27,8 +29,8 @@ size = Vector2(1.9, 1.08)
 
 [node name="tv" instance=ExtResource("1_4o2nj")]
 script = ExtResource("2_41xin")
-video_streams_tape = Array[VideoStream]([ExtResource("3_wsbyd"), ExtResource("4_dmm2f"), ExtResource("5_jgidw"), ExtResource("6_0a738")])
-audio_streams_tape = Array[AudioStream]([ExtResource("4_fe3dp"), ExtResource("7_0a738"), ExtResource("8_0rkvf"), ExtResource("10_0rkvf")])
+video_streams_tape = Array[VideoStream]([ExtResource("3_wsbyd"), ExtResource("4_dmm2f"), ExtResource("5_jgidw"), ExtResource("6_0a738"), ExtResource("7_muscp")])
+audio_streams_tape = Array[AudioStream]([ExtResource("4_fe3dp"), ExtResource("7_0a738"), ExtResource("8_0rkvf"), ExtResource("10_0rkvf"), ExtResource("12_tmniw")])
 normal_audio = Array[AudioStream]([ExtResource("5_2t2yq")])
 behavior = 6
 rotation_speed = 10.0
@@ -42,13 +44,7 @@ transform = Transform3D(-4.502273e-08, 0, 1, 0, 0.9, 0, -1.03, 0, -4.371139e-08,
 material_override = SubResource("StandardMaterial3D_fe3dp")
 mesh = SubResource("QuadMesh_wsbyd")
 
-[node name="TvAudioStreamer" type="AudioStreamPlayer3D" parent="holder" index="0"]
-unique_name_in_owner = true
-volume_db = -30.0
-autoplay = true
-max_distance = 8.0
-
-[node name="SubViewport" type="SubViewport" parent="holder" index="1"]
+[node name="SubViewport" type="SubViewport" parent="holder" index="0"]
 size = Vector2i(1280, 720)
 
 [node name="Control" type="Control" parent="holder/SubViewport" index="0"]
@@ -73,3 +69,10 @@ grow_vertical = 2
 volume_db = -80.0
 autoplay = true
 metadata/_edit_use_anchors_ = true
+
+[node name="TvAudioStreamer" type="AudioStreamPlayer3D" parent="holder" index="1"]
+unique_name_in_owner = true
+volume_db = -20.0
+max_db = 0.0
+autoplay = true
+max_distance = 8.0

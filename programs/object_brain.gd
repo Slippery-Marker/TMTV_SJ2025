@@ -26,6 +26,7 @@ var _rng:int
 var _initial_y:float=0
 var _static_initial_y:float=0
 var _holder
+static var _secrethapp:int=0
 static var _inv:inventory_manager=inventory_manager.new()
 func _ready() -> void:
 	_initial_y = global_transform.origin.y
@@ -141,6 +142,9 @@ func _process(delta: float) -> void:
 		1:
 			if _inv.get_tape()==0:
 				_set_behavior(6)
+		3:
+			if _inv.get_key()==0:
+				_set_behavior(7)
 		6:
 			if _inv.get_tape()>0:
 				_set_behavior(1)
@@ -179,6 +183,7 @@ func interact():
 					randomize()
 					_set_rng_tv()
 					await _audio_player.finished
+					_secrethapp=1
 					queue_free()
 				elif _tape_rng_poolsize >=1:
 					_set_behavior(8)
@@ -233,6 +238,8 @@ func interact():
 			%collision.queue_free()
 			await _door_audio_player.finished
 			_set_animator(0)
+func get_secret():
+	return _secrethapp
 func get_behavior():
 	return behavior
 #NOTE: this might be one of the most modular things in the project, you put this on any object it will work but yeah its pretty limited but hey im running low on time thanks to what happend with Mono Godot and the outdated documentation/tutorials that just throw errors even when you copy 1 by 1 idk how that's even possible.

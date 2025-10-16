@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://bx7h0dcatbl0a"]
+
+[ext_resource type="PackedScene" uid="uid://dvmyk3ulivepn" path="res://scenes/PB/tvstatic.tscn" id="1_04nsg"]
+[ext_resource type="PackedScene" uid="uid://2iq33al6kehl" path="res://scenes/PB/main_menu_layout.tscn" id="1_h1mee"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_04nsg"]
+sky_top_color = Color(0.03642191, 0.053435005, 0.076167114, 1)
+sky_horizon_color = Color(0.115459666, 0.11586529, 0.11723362, 1)
+ground_bottom_color = Color(0.06887774, 0.05348716, 0.036228362, 1)
+ground_horizon_color = Color(0.115459666, 0.11586529, 0.11723362, 1)
+
+[sub_resource type="Sky" id="Sky_h1mee"]
+sky_material = SubResource("ProceduralSkyMaterial_04nsg")
+
+[sub_resource type="Environment" id="Environment_6lfbd"]
+background_mode = 2
+sky = SubResource("Sky_h1mee")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_h1mee"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h1mee"]
+size = Vector2(0.665, 22.62)
+
+[node name="StartMenu" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6lfbd")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(17.49987, 0, 0, 0, -7.5210806e-07, 0.22825985, 0, -17.206226, -9.977555e-09, 0, 0.1621182, 1.1413388)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_h1mee")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.7276516, 0, 0, 0, 1, 0, 0.13450092, 19.350311)
+mesh = SubResource("BoxMesh_h1mee")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0, -0.013266123, 0, 21.537144, 7.274679e-08, 0, 0.464948, 8.761942)
+mesh = SubResource("BoxMesh_h1mee")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.49336368, 0.1449367, 8.761944)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_h1mee")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D4"]
+transform = Transform3D(-3.244879e-08, 0, 0.013043518, 0.7550106, 0, 5.798806e-10, -4.1402154e-06, 21.537144, -3.1798631e-15, 0.49388257, 0.12614214, 8.761944)
+mesh = SubResource("BoxMesh_h1mee")
+skeleton = NodePath("../..")
+
+[node name="tv" parent="." instance=ExtResource("1_04nsg")]
+transform = Transform3D(7.54979e-08, 0, -1, 0, 1, 0, 1, 0, 7.54979e-08, 0, 0.282, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.9988444, 0.047861274, 0.0043727197, 0.02910294, -0.67474383, 0.7374779, 0.0382471, -0.7364984, -0.675357, -0.019708866, 2.1110206, 0.7182667)
+shadow_enabled = true
+spot_range = 2.86
+spot_attenuation = 1.86
+spot_angle = 66.3
+spot_angle_attenuation = 0.5000032
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(0.82185555, 0.28291538, 0.49448198, -0.11403296, 0.93210447, -0.34376997, -0.5581667, 0.22614202, 0.79831684, 0.5611421, 0.40781736, 1.4539063)
+near = 0.001
+far = 14.0
+
+[node name="MainMenuLayout" parent="." instance=ExtResource("1_h1mee")]

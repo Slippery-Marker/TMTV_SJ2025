@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkkkdc2dbhjg1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8582"]
+albedo_color = Color(0.9513326, 0.19266585, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_csk5y"]
+size = Vector3(1, 2, 0.5)
+
+[node name="closet2" type="RigidBody3D"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1, 0)
+
+[node name="Closet" type="CSGBox3D" parent="."]
+size = Vector3(1, 2, 0.5)
+material = SubResource("StandardMaterial3D_y8582")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_csk5y")

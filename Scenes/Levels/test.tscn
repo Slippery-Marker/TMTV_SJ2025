@@ -45,15 +45,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05234003, 0)
 use_collision = true
 size = Vector3(50, 0.1, 50)
 
-[node name="PlayerController" parent="." instance=ExtResource("1_cmgem")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5596073, 4.665453)
-
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(0.21, 0, 0, 0, 1, 0, 0, 0, 1, -11.185597, 1.1136947, -12.8467865)
 use_collision = true
 
 [node name="tv" parent="." instance=ExtResource("4_oteci")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7637153, 0.29529965, 3.253337)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7637153, 1.2952996, 3.253337)
 
 [node name="tape" parent="." instance=ExtResource("3_8kuwg")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.7887588, 0.722154, 5.0165367)
@@ -66,13 +63,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.905409, 0, 1.27)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999944, 0.003316119, 0, -0.003316119, 0.9999944, -4.776402, 1.5664766, -12.841734)
-mass = 0.01
 can_sleep = false
 
 [node name="TestObject" type="CSGBox3D" parent="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.3283064e-10, 0, -2.3283064e-10, 1.0000001, 4.7683716e-07, 0, 0)
 material_override = SubResource("StandardMaterial3D_cmgem")
-use_collision = true
+calculate_tangents = false
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
@@ -93,15 +89,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.905409, 0, -0.5660471)
 behavior = 5
 
 [node name="tv2" parent="." instance=ExtResource("4_oteci")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7637153, 0.29529965, 9.400531)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7637153, 1.2952996, 9.400531)
 
 [node name="RigidBody3D2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.029303074, -10.465495)
-mass = 0.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4202392, -10.465495)
 can_sleep = false
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="RigidBody3D2"]
-use_collision = true
+calculate_tangents = false
 smooth_faces = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
@@ -140,4 +135,7 @@ use_collision = true
 size = Vector3(50.267334, 6.592285, 1)
 
 [node name="tv3" parent="." instance=ExtResource("4_oteci")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3707976, 0.29529965, 9.0619135)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.3707976, 1.2952996, 9.0619135)
+
+[node name="PlayerController" parent="." instance=ExtResource("1_cmgem")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5596073, 4.665453)
